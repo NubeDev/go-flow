@@ -99,10 +99,12 @@ func Log() Spec {
 	return Spec{
 		Name:     "log",
 		Category: []string{"mechanism"},
-		Inputs:   []Pin{Pin{"log", ANY}},
+		Inputs:   []Pin{Pin{"log", ANY}, Pin{"delay", STRING}},
 		Outputs:  []Pin{},
 		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
 			o, err := json.Marshal(in[0])
+			//t, err := time.ParseDuration(in[1].(string))
+			//time.Sleep(t)
 			if err != nil {
 				fmt.Println(err)
 			}

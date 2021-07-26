@@ -3,7 +3,7 @@ package core
 func And() Spec {
 	return Spec{
 		Name:    "and",
-		Inputs:  []Pin{Pin{"in", BOOLEAN}, Pin{"in", BOOLEAN}, Pin{"in2", BOOLEAN}},
+		Inputs:  []Pin{Pin{"in", BOOLEAN}, Pin{"in", BOOLEAN}, Pin{"in", BOOLEAN}, Pin{"aidan new in", BOOLEAN}},
 		Outputs: []Pin{Pin{"out", BOOLEAN}},
 		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
 			x, ok := in[0].(bool)
@@ -48,6 +48,22 @@ func Or() Spec {
 		},
 	}
 }
+
+var toggle int
+
+func Toggle() Spec {
+	return Spec{
+		Name:    "toggle",
+		Inputs:  []Pin{},
+		Outputs: []Pin{Pin{"draw", NUMBER}},
+		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
+			toggle = (toggle + 1) % 2
+			out[0] = toggle
+			return nil
+		},
+	}
+}
+
 
 func Not() Spec {
 	return Spec{

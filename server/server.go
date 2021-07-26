@@ -94,7 +94,7 @@ func NewServer(settings Settings) *Server {
 		emitChan:      make(chan []byte),
 	}
 	// ws stuff
-	log.Println("starting websocker handler")
+	log.Println("starting websocket handler")
 	go s.websocketRouter()
 	return s
 }
