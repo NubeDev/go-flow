@@ -29,7 +29,7 @@ func GetLibrary() map[string]Spec {
 		Sink(),
 		Latch(),
 		Gate(),
-		Identity(),
+		Identity(), //pass through
 		Timestamp(),
 
 		// object
@@ -94,9 +94,6 @@ func GetLibrary() map[string]Spec {
 		// parsers
 		ParseJSON(),
 
-		// NSQ interface
-		NSQConsumerConnect(),
-		NSQConsumerReceive(),
 
 		// primitive value
 		ValueGet(),
@@ -136,6 +133,7 @@ func GetLibrary() map[string]Spec {
 		And(),
 		Or(),
 		Not(),
+		Toggle(),
 
 		//string functions
 		StringConcat(),

@@ -114,7 +114,8 @@ var app = app || {};
         },
         _onKeyDown: function(e) {
             // only fire delete if we have the stage in focus
-            if (e.keyCode === 8 && e.target === document.body) {
+            if (e.keyCode === 46 && e.target === document.body) {
+                console.log(22222222)
                 e.preventDefault();
                 e.stopPropagation();
                 app.Dispatcher.dispatch({

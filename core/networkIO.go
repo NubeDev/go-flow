@@ -9,11 +9,11 @@ import (
 	"time"
 )
 
-// HTTPResponse makes an HTTP request to the specified URL, emitting the response as a string.
+// HTTPRequest HTTPResponse makes an HTTP request to the specified URL, emitting the response as a string.
 func HTTPRequest() Spec {
 	return Spec{
-		Name:    "HTTPRequestssss",
-		Inputs:  []Pin{Pin{"URL", STRING}, Pin{"header", OBJECT}, Pin{"method", STRING}, Pin{"bodyss", STRING}},
+		Name:    "HTTPRequest",
+		Inputs:  []Pin{Pin{"URL", STRING}, Pin{"header", OBJECT}, Pin{"method", STRING}, Pin{"body", STRING}},
 		Outputs: []Pin{Pin{"response", STRING}},
 		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
 
@@ -27,7 +27,7 @@ func HTTPRequest() Spec {
 			// TODO
 			header, ok := in[1].(map[string]interface{})
 			if !ok {
-				out[0] = NewError("HTTPResponse requres headers to be an object")
+				out[0] = NewError("HTTPResponse requires headers to be an object")
 				return nil
 			}
 			method, ok := in[2].(string)

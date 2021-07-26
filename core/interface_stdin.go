@@ -3,6 +3,7 @@ package core
 import (
 	"bufio"
 	"errors"
+	"log"
 	"os"
 )
 
@@ -56,7 +57,7 @@ func (stdin *Stdin) Stop() {
 func (stdin Stdin) ReceiveMessage(i chan Interrupt) (string, Interrupt, error) {
 	select {
 	case msg := <-stdin.fromScanner:
-		//log.Println("FROM SCANNER", msg.err == nil, msg.err)
+		log.Println("FROM SCANNER", msg.err == nil, msg.err)
 		return msg.msg, nil, msg.err
 	case f := <-i:
 		return "", f, nil

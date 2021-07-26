@@ -2,6 +2,7 @@ package core
 
 import (
 	"errors"
+	"fmt"
 	"sync"
 	"time"
 )
@@ -54,6 +55,7 @@ func (b *Block) Serve() {
 		b.done <- struct{}{}
 	}()
 	for {
+		fmt.Println(22222)
 		var interrupt Interrupt
 
 		b.routing.RLock()
@@ -128,7 +130,7 @@ func (b *Block) GetInputs() []Input {
 	return re
 }
 
-// RouteValue sets the route to always be the specified value
+// SetInput RouteValue sets the route to always be the specified value
 func (b *Block) SetInput(id RouteIndex, v *InputValue) error {
 	returnVal := make(chan error, 1)
 	b.routing.InterruptChan <- func() bool {
@@ -151,7 +153,7 @@ func (b *Block) SetInput(id RouteIndex, v *InputValue) error {
 	return <-returnVal
 }
 
-// Outputs return a list of manifest pairs for the block
+// GetOutputs Outputs return a list of manifest pairs for the block
 func (b *Block) GetOutputs() []Output {
 	b.routing.RLock()
 	m := make([]Output, len(b.routing.Outputs), len(b.routing.Outputs))
@@ -314,7 +316,7 @@ func (b *Block) process() Interrupt {
 		}
 	}
 
-	//fmt.Println(1111111)
+	fmt.Println(1111111)
 
 	// we should only be able to get here if
 	// - we don't need an shared state
