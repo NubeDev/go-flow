@@ -220,7 +220,6 @@ func wsClientConnect() Spec {
 		Inputs:  []Pin{Pin{"url", STRING}, Pin{"origin", STRING}},
 		Source:  WSCLIENT,
 		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
-
 			url, ok := in[0].(string)
 			if !ok {
 				out[0] = NewError("wsClientConnect requries string url")
@@ -284,13 +283,11 @@ func wsClientSend() Spec {
 		Source:  WSCLIENT,
 		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
 			ws := s.(*wsClient)
-
 			msg, ok := in[0].(string)
 			if !ok {
 				out[0] = NewError("wsClientSend requires string msg")
 				return nil
 			}
-
 			err := ws.SendMessage(msg)
 			if err != nil {
 				out[0] = err

@@ -3,6 +3,9 @@ module github.com/NubeDev/go-flow
 go 1.16
 
 require (
+	github.com/NubeIO/nubeio-rubix-lib-helpers-go v0.0.7
+	github.com/NubeIO/nubeio-rubix-lib-mqtt-go v0.0.8
+	github.com/eclipse/paho.mqtt.golang v1.3.5
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/mux v1.8.0

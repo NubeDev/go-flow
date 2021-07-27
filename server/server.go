@@ -45,8 +45,8 @@ type Server struct {
 	settings      Settings
 	groups        map[int]*Group // TODO these maps aren't strictly necessary, but save constantly performing depth first searches
 	parents       map[int]int
-	blocks        map[int]*BlockLedger
-	connections   map[int]*ConnectionLedger
+	blocks        map[int]*BlockLedger  // these are the nodes
+	connections   map[int]*ConnectionLedger // connections between the nodes
 	sources       map[int]*SourceLedger
 	links         map[int]*LinkLedger
 	library       map[string]core.Spec
@@ -99,7 +99,7 @@ func NewServer(settings Settings) *Server {
 	return s
 }
 
-// GetNextID eturns the next ID to be used for a new group or a new block
+// GetNextID returns the next ID to be used for a new group or a new block
 func (s *Server) GetNextID() int {
 	s.lastID++
 	return s.lastID

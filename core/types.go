@@ -14,6 +14,7 @@ const (
 	PRIORITY
 	NSQCONSUMER
 	WSCLIENT
+	MQTTCLIENT
 	STDIN
 )
 
@@ -32,7 +33,7 @@ const (
 	ERROR
 )
 
-// BlockAlert defines the possible messages a block can emit about its runnig state
+// BlockInfo BlockAlert defines the possible messages a block can emit about its runnig state
 type BlockInfo uint8
 
 const (
@@ -81,6 +82,8 @@ func (s *SourceType) UnmarshalJSON(data []byte) error {
 		*s = SourceType(KEY_VALUE)
 	case `"NSQ"`:
 		*s = SourceType(NSQCONSUMER)
+	case `"mqttClient"`:
+		*s = SourceType(MQTTCLIENT)
 	case `"wsClient"`:
 		*s = SourceType(WSCLIENT)
 	case `"list"`:
@@ -105,6 +108,8 @@ func (s SourceType) MarshalJSON() ([]byte, error) {
 		return []byte(`"key_value"`), nil
 	case NSQCONSUMER:
 		return []byte(`"NSQ"`), nil
+	case MQTTCLIENT:
+		return []byte(`"mqttClient"`), nil
 	case WSCLIENT:
 		return []byte(`"wsClient"`), nil
 	case LIST:
@@ -119,7 +124,7 @@ func (s SourceType) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("Unknown source type")
 }
 
-// Connections are used to connect blocks together
+// Connection Connections are used to connect blocks together
 type Connection chan Message
 
 // Interrupt is a function that interrupts a running block in order to change its state.
@@ -165,7 +170,7 @@ func (i *InputValue) Exists() bool {
 }
 
 // An Output holds a set of Connections. Each Connection refers to a Input.C. Every outbound
-// mesage is sent on every Connection in the Connections set.
+// message is sent on every Connection in the Connections set.
 type Output struct {
 	Name        string                  `json:"name"`
 	Type        JSONType                `json:"type"`
@@ -180,7 +185,7 @@ type SourceSpec struct {
 	Category []string
 }
 
-// A function that creates a source
+// SourceFunc A function that creates a source
 type SourceFunc func() Source
 
 // A ManifestPair is a unique reference to an Output/Connection pair
@@ -189,10 +194,10 @@ type ManifestPair struct {
 	Connection
 }
 
-// A block's Manifest is the set of Connections
+// Manifest A block's Manifest is the set of Connections
 type Manifest map[ManifestPair]struct{}
 
-// A block's BlockState is the pair of input/output MessageMaps, and the Manifest
+// BlockState A block's BlockState is the pair of input/output MessageMaps, and the Manifest
 type BlockState struct {
 	inputValues    MessageMap
 	outputValues   MessageMap
@@ -219,7 +224,7 @@ type Store interface {
 	Unlock()
 }
 
-// A block's BlockRouting is the set of Input and Output routes, and the Interrupt channel
+// BlockRouting A block's BlockRouting is the set of Input and Output routes, and the Interrupt channel
 type BlockRouting struct {
 	Inputs        []Input
 	Outputs       []Output

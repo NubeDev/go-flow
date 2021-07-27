@@ -3,12 +3,11 @@ package server
 import (
 	"encoding/json"
 	"errors"
+	"github.com/NubeDev/go-flow/core"
+	"github.com/gorilla/mux"
 	"io/ioutil"
 	"log"
 	"net/http"
-
-	"github.com/NubeDev/go-flow/core"
-	"github.com/gorilla/mux"
 )
 
 type ConnectionNode struct {
@@ -48,7 +47,7 @@ func (s *Server) ConnectionIndexHandler(w http.ResponseWriter, r *http.Request) 
 	}
 }
 
-// CreateConnectionHandler responds to a POST request to instantiate a new connection
+// ConnectionCreateHandler CreateConnectionHandler responds to a POST request to instantiate a new connection
 func (s *Server) ConnectionCreateHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -59,7 +58,6 @@ func (s *Server) ConnectionCreateHandler(w http.ResponseWriter, r *http.Request)
 
 	var newConn ProtoConnection
 	json.Unmarshal(body, &newConn)
-
 	s.Lock()
 	defer s.Unlock()
 
@@ -185,7 +183,7 @@ func (s *Server) ResetGraph(conn *ConnectionLedger) {
 	}
 }
 
-// returns a description of the connection
+// ConnectionHandler returns a description of the connection
 func (s *Server) ConnectionHandler(w http.ResponseWriter, r *http.Request) {
 
 	id, err := getIDFromMux(mux.Vars(r))

@@ -11,7 +11,7 @@ func InArray() Spec {
 		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
 			arr, ok := in[1].([]interface{})
 			if !ok {
-				out[0] = NewError("inArray requries array")
+				out[0] = NewError("inArray requires array")
 				return nil
 			}
 			for _, x := range arr {
@@ -35,7 +35,7 @@ func HasField() Spec {
 		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
 			obj, ok := in[1].(map[string]interface{})
 			if !ok {
-				out[0] = NewError("HasField requries map for object")
+				out[0] = NewError("HasField requires map for object")
 				return nil
 			}
 			field, ok := in[0].(string)
