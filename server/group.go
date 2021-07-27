@@ -159,7 +159,7 @@ func (s *Server) AddChildToGroup(id int, n Node) error {
 	return nil
 }
 
-// CreateGroupHandler responds to a POST request to instantiate a new group and add it to the Server.
+// GroupCreateHandler CreateGroupHandler responds to a POST request to instantiate a new group and add it to the Server.
 // Moves all of the specified children out of the parent's group and into the new group.
 func (s *Server) GroupCreateHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
@@ -292,7 +292,7 @@ func (s *Server) GroupDeleteHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-// returns a description of the group - its id and childreen
+// GroupHandler returns a description of the group - its id and children
 func (s *Server) GroupHandler(w http.ResponseWriter, r *http.Request) {
 	id, err := getIDFromMux(mux.Vars(r))
 	if err != nil {

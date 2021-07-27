@@ -17,7 +17,7 @@ func NewError(s string) *stcoreError {
 	}
 }
 
-// Library is the set of all core block Specs
+// GetLibrary Library is the set of all core block Specs
 // TODO: should just "Build" a global variable so we don't have to iterate
 // over all funcs every time we need the library
 func GetLibrary() map[string]Spec {
@@ -25,49 +25,55 @@ func GetLibrary() map[string]Spec {
 		// mechanism
 		First(),
 		Delay(),
-		Log(),
+		Console(), //Console log
 		Sink(),
 		Latch(),
 		Gate(),
 		Identity(), //pass through
 		Timestamp(),
 
-		// object
-		Set(),
-		Get(),
-		Keys(),
-		Merge(),
-		HasField(),
-
-		// array
-		Append(),
-		Tail(),
-		Head(),
-		Init(),
-		Last(),
-		Len(),
-		InArray(),
+		//logic
+		And(),
+		Or(),
+		Not(),
+		Toggle(),
+		GreaterThan(),
+		LessThan(),
+		EqualTo(),
+		NotEqualTo(),
 
 		// maths
-		Exp(),
-		Floor(),
-		Ceil(),
-		Log10(),
-		Ln(),
-		Sqrt(),
-		Sin(),
-		Cos(),
-		Tan(),
 		Addition(),
 		Subtraction(),
 		Multiplication(),
 		Division(),
 		Exponentiation(),
 		Modulation(),
-		GreaterThan(),
-		LessThan(),
-		EqualTo(),
-		NotEqualTo(),
+		Exp(),
+		Floor(),
+		Ceil(),
+		Log10(),
+		Log(),
+		Sqrt(),
+		Sin(),
+		Cos(),
+		Tan(),
+
+		//assertions
+		IsBoolean(),
+		IsNumber(),
+		IsString(),
+		IsArray(),
+		IsObject(),
+		IsError(),
+
+		// conversion
+		ToString(),
+		ToNumber(),
+
+		//NSQConsumerInterface(),
+		//NSQConsumerConnect(),
+		//NSQConsumerReceive(),
 
 		// random
 		UniformRandom(),
@@ -94,6 +100,21 @@ func GetLibrary() map[string]Spec {
 		// parsers
 		ParseJSON(),
 
+		// object
+		Set(),
+		Get(),
+		Keys(),
+		Merge(),
+		HasField(),
+
+		// array
+		Append(),
+		Tail(),
+		Head(),
+		Init(),
+		Last(),
+		Len(),
+		InArray(),
 
 		// primitive value
 		ValueGet(),
@@ -117,23 +138,6 @@ func GetLibrary() map[string]Spec {
 		// network IO
 		HTTPRequest(),
 
-		//assertions
-		IsBoolean(),
-		IsNumber(),
-		IsString(),
-		IsArray(),
-		IsObject(),
-		IsError(),
-
-		// conversion
-		ToString(),
-		ToNumber(),
-
-		//logic
-		And(),
-		Or(),
-		Not(),
-		Toggle(),
 
 		//string functions
 		StringConcat(),

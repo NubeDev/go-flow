@@ -12,7 +12,7 @@ import (
 type LinkLedger struct {
 	Source struct {
 		Id int `json:"id"`
-	} `json:"source"` // the soure id
+	} `json:"source"` // the source id
 	Block struct {
 		Id int `json:"id"`
 	} `json:"block"` // the block id
@@ -22,7 +22,7 @@ type LinkLedger struct {
 type ProtoLink struct {
 	Source struct {
 		Id int `json:"id"`
-	} `json:"source"` // the soure id
+	} `json:"source"` // the source id
 	Block struct {
 		Id int `json:"id"`
 	} `json:"block"` // the block id

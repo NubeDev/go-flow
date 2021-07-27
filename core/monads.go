@@ -71,9 +71,9 @@ func Log10() Spec {
 		},
 	}
 }
-func Ln() Spec {
+func Log() Spec {
 	return Spec{
-		Name:    "ln",
+		Name:    "log",
 		Inputs:  []Pin{Pin{"in", NUMBER}},
 		Outputs: []Pin{Pin{"ln", NUMBER}},
 		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {

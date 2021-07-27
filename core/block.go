@@ -2,7 +2,6 @@ package core
 
 import (
 	"errors"
-	"fmt"
 	"sync"
 	"time"
 )
@@ -55,7 +54,6 @@ func (b *Block) Serve() {
 		b.done <- struct{}{}
 	}()
 	for {
-		fmt.Println(22222)
 		var interrupt Interrupt
 
 		b.routing.RLock()
@@ -178,7 +176,7 @@ func (b *Block) GetSource() Source {
 	return v
 }
 
-// sets a store for the block. can be set to nil
+// SetSource sets a store for the block. can be set to nil
 func (b *Block) SetSource(s Source) error {
 	returnVal := make(chan error, 1)
 	b.routing.InterruptChan <- func() bool {
@@ -246,7 +244,7 @@ func (b *Block) Reset() {
 
 	// if there are any messages on the input channels, flush them.
 	// note: all blocks that are sending to this block MUST BE IN A
-	// STOPPED STATE. if any block routines that posess this block's
+	// STOPPED STATE. if any block routines that possess this block's
 	// input channel are in a RUNNING state, this flush will not work
 	// because it will simply pull another message into the buffer.
 	for _, input := range b.routing.Inputs {
@@ -316,8 +314,6 @@ func (b *Block) process() Interrupt {
 		}
 	}
 
-	fmt.Println(1111111)
-
 	// we should only be able to get here if
 	// - we don't need an shared state
 	// - we have an external shared state and it has been attached
@@ -341,7 +337,7 @@ func (b *Block) process() Interrupt {
 		store.Unlock()
 	}
 
-	// if an interrupt was receieved, return it
+	// if an interrupt was received, return it
 	if interrupt != nil {
 		return interrupt
 	}
