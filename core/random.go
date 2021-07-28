@@ -42,7 +42,7 @@ func NormalRandom() Spec {
 	}
 }
 
-// the global random number source
+// RAND the global random number source
 var RAND *rand.Rand = rand.New(rand.NewSource(12345))
 
 // ZipfRandom emits a Zipfian distributed random number
@@ -78,7 +78,7 @@ func ZipfRandom() Spec {
 	}
 }
 
-// poisson returns an integer (though we actually pretend it's a float) from a Poisson distrbution
+// poisson returns an integer (though we actually pretend it's a float) from a Poisson distribution
 func poisson(λ float64) float64 {
 	var k float64
 	L := math.Exp(-λ)
@@ -94,7 +94,7 @@ func poisson(λ float64) float64 {
 	}
 }
 
-// PoissonRandom emits a Poisson distribtued random number
+// PoissonRandom emits a Poisson distributed random number
 func PoissonRandom() Spec {
 	return Spec{
 		Name:    "poisson",
@@ -116,7 +116,7 @@ func PoissonRandom() Spec {
 	}
 }
 
-// ExponentialRandom emits an Exponentially distribtued random number
+// ExponentialRandom emits an Exponentially distributed random number
 func ExponentialRandom() Spec {
 	return Spec{
 		Name:    "exponential",

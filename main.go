@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	port = flag.String("port", "7071", "streamtools port")
+	port = flag.String("port", "7071", "stream tools port")
 )
 
 func main() {
@@ -25,16 +25,17 @@ func main() {
 	dir, err := homedir.Dir()
 	if err != nil {
 		log.Fatal(err)
+
 	}
-	fname := dir + "/stt.json"
-	d, err := ioutil.ReadFile(fname)
+	fName := dir + "/stt.json"
+	d, err := ioutil.ReadFile(fName)
 	if err != nil {
 		if os.IsNotExist(err) {
 			// make a fresh settings file
-			log.Println("creating new settings file at", fname)
+			log.Println("creating new settings file at", fName)
 			newSettings := server.NewSettings()
 			d, err = json.Marshal(newSettings)
-			err = ioutil.WriteFile(fname, d, 0644)
+			err = ioutil.WriteFile(fName, d, 0644)
 			if err != nil {
 				log.Fatal(err)
 			}

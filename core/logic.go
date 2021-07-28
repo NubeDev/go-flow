@@ -6,6 +6,27 @@ import (
 )
 
 
+func And2() Spec {
+	return Spec{
+		Name:    "and2",
+		Inputs:  []Pin{Pin{"in1", BOOLEAN}, Pin{"in2", BOOLEAN}},
+		Outputs: []Pin{Pin{"out", BOOLEAN}},
+		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
+			x, ok := in[0].(bool)
+			if !ok {
+				out[0] = NewError("need boolean")
+				return nil
+			}
+			y, ok := in[1].(bool)
+			if !ok {
+				out[0] = NewError("need boolean")
+				return nil
+			}
+			out[0] = x && y
+			return nil
+		},
+	}
+}
 
 func And() Spec {
 	return Spec{
