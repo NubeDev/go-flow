@@ -1,10 +1,5 @@
 package core
 
-import (
-	"github.com/NubeIO/nubeio-rubix-lib-helpers-go/pkg/bools"
-	"strconv"
-)
-
 
 func And2() Spec {
 	return Spec{
@@ -67,24 +62,6 @@ func Or() Spec {
 				return nil
 			}
 			out[0] = x || y
-			return nil
-		},
-	}
-}
-
-var toggle int
-
-func Toggle() Spec {
-	return Spec{
-		Name:    "toggle",
-		Inputs:  []Pin{},
-		Outputs: []Pin{Pin{"out", NUMBER}},
-		Kernel: func(in, out, internal MessageMap, s Source, i chan Interrupt) Interrupt {
-			toggle = (toggle + 1) % 2
-			b, err := bools.Boolean(strconv.Itoa(toggle));if err != nil {
-				return nil
-			}
-			out[0] = b
 			return nil
 		},
 	}

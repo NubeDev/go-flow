@@ -20,7 +20,6 @@ const (
 
 // JSONType defines the possible types that variables in core can take
 type JSONType uint8
-
 const (
 	NUMBER JSONType = iota
 	STRING
@@ -33,9 +32,8 @@ const (
 	ERROR
 )
 
-// BlockInfo BlockAlert defines the possible messages a block can emit about its runnig state
+// BlockInfo BlockAlert defines the possible messages a block can emit about its running state
 type BlockInfo uint8
-
 const (
 	BI_RUNNING BlockInfo = iota
 	BI_ERROR
@@ -121,7 +119,7 @@ func (s SourceType) MarshalJSON() ([]byte, error) {
 	case STDIN:
 		return []byte(`"stdin"`), nil
 	}
-	return nil, errors.New("Unknown source type")
+	return nil, errors.New("unknown source type")
 }
 
 // Connection Connections are used to connect blocks together

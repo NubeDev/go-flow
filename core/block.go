@@ -55,7 +55,6 @@ func (b *Block) Serve() {
 	}()
 	for {
 		var interrupt Interrupt
-
 		b.routing.RLock()
 		for {
 			interrupt = b.receive()
@@ -86,6 +85,7 @@ func (b *Block) Serve() {
 }
 
 func (b *Block) exportInput(id RouteIndex) (*Input, error) {
+
 	if int(id) >= len(b.routing.Inputs) || int(id) < 0 {
 		return nil, errors.New("index out of range")
 	}
@@ -93,6 +93,7 @@ func (b *Block) exportInput(id RouteIndex) (*Input, error) {
 	if b.routing.Inputs[id].Value == nil {
 		return &b.routing.Inputs[id], nil
 	}
+
 
 	return &Input{
 		Value: &InputValue{
@@ -236,7 +237,7 @@ func (b *Block) Disconnect(id RouteIndex, c Connection) error {
 func (b *Block) Reset() {
 	b.crank()
 
-	// reset block's state as well. currently this only applies to a handful of
+	// reset block's state as well. currently, this only applies to a handful of
 	// blocks, like GET and first.
 	for k, _ := range b.state.internalValues {
 		delete(b.state.internalValues, k)
@@ -306,7 +307,6 @@ func (b *Block) process() Interrupt {
 	}
 
 	// block until connected to source if necessary
-
 	if b.sourceType != NONE && b.routing.Source == nil {
 		select {
 		case f := <-b.routing.InterruptChan:
@@ -360,7 +360,6 @@ func (b *Block) broadcast() Interrupt {
 		if !ok {
 			continue
 		}
-
 		// if there no connection for this output then wait until there
 		// is one. that means we have to wait for an interrupt.
 		if len(out.Connections) == 0 {

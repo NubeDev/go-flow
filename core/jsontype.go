@@ -22,7 +22,7 @@ func (j *JSONType) UnmarshalJSON(data []byte) error {
 	case `"any"`:
 		*j = JSONType(ANY)
 	default:
-		return errors.New("Error unmarshalling JSONType")
+		return errors.New("error unmarshalling JSONType")
 	}
 	return nil
 }
