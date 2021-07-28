@@ -31,11 +31,17 @@ func GetLibrary() map[string]Spec {
 		Identity(), //pass through
 		Timestamp(),
 
+		//count
+		AnyCount(),
+
+		//toggle
+		ToggleInt(),
+		ToggleBool(),
+
 		//logic
 		And(),
 		Or(),
 		Not(),
-		Toggle(),
 		GreaterThan(),
 		LessThan(),
 		EqualTo(),

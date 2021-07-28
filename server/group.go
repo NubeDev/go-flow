@@ -160,7 +160,7 @@ func (s *Server) AddChildToGroup(id int, n Node) error {
 }
 
 // GroupCreateHandler CreateGroupHandler responds to a POST request to instantiate a new group and add it to the Server.
-// Moves all of the specified children out of the parent's group and into the new group.
+// Moves all the specified children out of the parent's group and into the new group.
 func (s *Server) GroupCreateHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {

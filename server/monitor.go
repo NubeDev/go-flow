@@ -15,11 +15,11 @@ import (
 // the monitor. The monitor's job is to only emit state change, i.e., going
 // from one blocking state to another.
 //
-// currently, the sends from block are blocking, meaning that they are limtied
+// currently, the sends from block are blocking, meaning that they are limited
 // by the speed in which monitor can process messages.
 //
 // TODO: test the overhead of blocking sends from block to monitor. currently,
-// every block ges a monitor by default. an optimizing step may be to disable
+// every block gets a monitor by default. an optimizing step may be to disable
 // it by default, and affording the querying of state by some API handle.
 //
 // another strategy could be to leave the state in core.Block and have Monitor
