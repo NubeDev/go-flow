@@ -18,8 +18,7 @@ func NewError(s string) *stcoreError {
 }
 
 // GetLibrary Library is the set of all core block Specs
-// TODO: should just "Build" a global variable so we don't have to iterate
-// over all funcs every time we need the library
+// over all func's every time we need the library
 func GetLibrary() map[string]Spec {
 	b := []Spec{
 		// mechanism
@@ -71,9 +70,8 @@ func GetLibrary() map[string]Spec {
 		ToString(),
 		ToNumber(),
 
-		//NSQConsumerInterface(),
-		//NSQConsumerConnect(),
-		//NSQConsumerReceive(),
+		MQTTClientConnect(),
+		MQTTClientSend(),
 
 		// random
 		UniformRandom(),

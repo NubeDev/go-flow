@@ -173,7 +173,7 @@ func (s *Server) CreateBlock(p ProtoBlock) (*BlockLedger, error) {
 	return m, nil
 }
 
-// CreateBlockHandler responds to a POST request to instantiate a new block and add it to the Server.
+// BlockCreateHandler CreateBlockHandler responds to a POST request to instantiate a new block and add it to the Server.
 func (s *Server) BlockCreateHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
